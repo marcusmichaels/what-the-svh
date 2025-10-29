@@ -21,7 +21,7 @@
         position: relative;
         margin: 0;
         background: var(--bg);
-        color: var(--fg);
+        color: var(--lgt);
         height: 100svh;
       }
 
@@ -36,7 +36,6 @@
         position: fixed;
         display: flex;
         border-color: var(--lgt);
-        color: var(--lgt);
         align-items: center;
         justify-content: center;
       }
@@ -45,7 +44,7 @@
         width: 100%;
         height: 0px;
         border-top: 1px dashed;
-        top: 25%;
+        top: 17.5%;
         left: 0;
       }
 
@@ -53,7 +52,7 @@
         height: 100%;
         width: 0px;
         border-right: 1px dashed;
-        left: 25%;
+        left: 17.5%;
         top: 0;
       }
 
@@ -108,7 +107,7 @@
         margin-left: -8px;
         pointer-events: none;
         border-radius: 16px;
-        border: 2px solid var(--md);
+        border: 1px solid var(--md);
       }
 
       .crosshair {
@@ -125,6 +124,31 @@
         background-color: var(--md);
         border-radius: 4px;
       }
+
+      .credit {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        left: 20%;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        text-align: right;
+
+        span {
+          display: block;
+          font-weight: bold;
+          color: tomato;
+          font-size: 2em;
+        }
+
+        a {
+          display: block;
+          color: inherit;
+          text-decoration: none;
+          font-size: inherit;
+          margin-top: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -137,12 +161,16 @@
     <div class="rule-of-thirds-grid"></div>
     <div class="x-axis axis"><div class="value" id="svhX">-</div></div>
     <div class="y-axis axis"><div class="value" id="svhY">-</div></div>
+    <div class="credit">
+      <span id="supportNote"></span>
+      <a href="https://github.com/marcusmichaels/what-the-svh">❤︎ View on GitHub</a>
+    </div>
 
     <script>
       (function () {
         const svhElX = document.getElementById("svhX");
         const svhElY = document.getElementById("svhY");
-        // const noteEl = document.getElementById("supportNote");
+        const noteEl = document.getElementById("supportNote");
 
         // tiny helper to read a CSS custom prop as a number
         function readNumberFromCSSVar(name) {
@@ -171,12 +199,12 @@
           svhElX.textContent = Math.round(width) + "px";
           svhElY.textContent = Math.round(height) + "px";
 
-          // // info / fallback messaging
-          // if (!CSS.supports("height", "100svh")) {
-          //     noteEl.textContent = "Your browser doesn't support svh. Value above is just what we measured anyway.";
-          // } else {
-          //     noteEl.textContent = "";
-          // }
+          // info / fallback messaging
+          if (!CSS.supports("height", "100svh")) {
+            noteEl.textContent = "Your browser doesn't support svh";
+          } else {
+            noteEl.textContent = "";
+          }
         }
 
         // run now
