@@ -13,6 +13,10 @@
         font-family: monospace;
       }
 
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         position: relative;
         margin: 0;
@@ -93,9 +97,42 @@
               transparent calc(66.6666% + 0.5px)
             );
       }
+
+      .crosshair-wrapper {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 16px;
+        height: 16px;
+        margin-top: -8px;
+        margin-left: -8px;
+        pointer-events: none;
+        border-radius: 16px;
+        border: 2px solid var(--md);
+      }
+
+      .crosshair {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .crosshair .dot {
+        width: 4px;
+        height: 4px;
+        background-color: var(--md);
+        border-radius: 4px;
+      }
     </style>
   </head>
   <body>
+    <div class="crosshair-wrapper">
+      <div class="crosshair">
+        <div class="dot"></div>
+      </div>
+    </div>
     <div class="frame"></div>
     <div class="rule-of-thirds-grid"></div>
     <div class="x-axis axis"><div class="value" id="svhX">-</div></div>
